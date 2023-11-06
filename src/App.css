@@ -1,38 +1,75 @@
-.App {
-  text-align: center;
+.card_front{
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  background-repeat: no-repeat;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.card_front table{
+  margin-left:40px;
+  margin-top: -140px;
+  width: 80%;
+  
 }
+.card_back{
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  background-repeat: no-repeat;
+}
+.cvv{
+  margin-left: -80px;
+  color: white;
+}
+.side_img {
+  height: 100%;
+}
+.user_input{
+  margin-left: 50%;
+  margin-top: 30%;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+}
+@media screen and (max-width: 480px) {
+  .side_img{
+    height: 30%;
+    width: 100%;
   }
-}
-
-.App-header {
-  background-color: #fdfdfd00;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: rgb(8, 0, 0);
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .card_front{
+    position: absolute;
+    margin-top: 200px; 
+    width: 20px;
+    height: 30px;
+    left: 10px;
   }
-  to {
-    transform: rotate(360deg);
+  .card_front_img
+  {
+    width: 50%;
   }
+  .card_front table
+  {
+    margin-left:40px;
+    width: 30%;
+    margin-left:20px;
+    margin-right: 20px;
+  }
+  .card_back{
+    position: absolute; 
+    width: 20px;
+    left: 10px;
+    margin-top: -470px;
+  }
+  .cvv{
+    margin-left: 1800%;
+    color: white;
+    background-color: red;
+  }
+  .user_input{
+    margin-top: -60%;
+    margin-left: 10px;
+  }
+  
+
+  /* container{
+    width: 100%;
+    margin-top: -800%;
+  } */
 }

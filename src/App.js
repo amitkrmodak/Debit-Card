@@ -2,8 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
 import desktop_img from "./img/bg-main-desktop.png";
-import card_front from "./img/bg-card-front.png";
-import card_back from "./img/bg-card-back.png";
+import card_front_img from "./img/bg-card-front.png";
+import card_back_img from "./img/bg-card-back.png";
+import icon_complete from "./img/icon-complete.svg";
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
@@ -12,7 +13,7 @@ function App() {
   //const [isValidName, setIsValidName] = useState(true);
   const [nameErrorMsg, setNameErrorMsg] = useState('');
 
-  const [number, setNumber] = useState('');
+  const [number, setNumber] = useState([]);
   //const [isValidNumber, setIsValidNumber] = useState(true);
   const [numberErrorMsg, setNumberErrorMsg] = useState('');
 
@@ -64,12 +65,19 @@ function App() {
 
 
   const handleNumber = (e) => {
+    let formattedNumber=0;
     const newNumber = e.target.value;
-    setNumber(newNumber);
+    // setNumber(newNumber);
     setNumberErrorMsg('');
     if (newNumber.length === 0) {
       setNameErrorMsg('');
     }
+    else
+    {
+      formattedNumber = newNumber.padEnd(16, 0);
+      //console.log(formattedNumber);
+    }
+    setNumber(formattedNumber);
     // // if(newNumber.length>16)
     // // {
     // //   setIsValidNumber(false);
@@ -81,33 +89,50 @@ function App() {
   }
 
   const handleMonth = (e) => {
+    let formattedMonth=0;
     const newMonth = e.target.value;
-    setMonth(newMonth);
     setMonthErrorMsg('');
     if (newMonth.length === 0) {
       setMonthErrorMsg('');
     }
+    else
+    {
+      formattedMonth = newMonth.padEnd(2, 0);
+    }
+    setMonth(formattedMonth);
   }
 
   const handleYear = (e) => {
     const newYear = e.target.value;
+    let formattedYear=0;
     setYear(newYear);
     setYearErrorMsg('');
     if (newYear.length === 0) {
       setYearErrorMsg('');
     }
+    else
+    {
+      formattedYear = newYear.padEnd(2, 0);
+    }
+    setYear(formattedYear);
   }
   const handleCvv = (e) => {
     const newCvv = e.target.value;
+    let formattedCvv=0;
     setCvv(newCvv);
     setCvvErrorMsg('');
     if (newCvv.length === 0) {
       setCvvErrorMsg('');
     }
+    else
+    {
+      formattedCvv = newCvv.padEnd(3, 0);
+    }
+    setCvv(formattedCvv);
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validName = /^[a-zA-Z]+$/.test(name);
+    const validName = /^[a-zA-Z\s]+$/.test(name);
 
     setIsSubmit(true);
     setNameErrorMsg('');
@@ -166,18 +191,22 @@ function App() {
   }
   return (
     <div className='Container' style={{ height: '100%', position: 'relative' }}>
-      <div className='row' style={{ height: '100%' }}>
-        <div className='col-md-3' style={{ backgroundImage: `url(${desktop_img})` }}>
+      <div className='row' style={{ height: '100%'}}>
+        {/* style={{ backgroundImage: `url(${desktop_img})` }} */}
+        <div className='col-md-3 '>
+          <img src={desktop_img} alt='' className="side_img"/>
         </div>
 
-        <div className='col-md-6'>
-          <div style={{ marginLeft: '50%', marginTop: '50%' }}>
+        <div className='col-md-6 form_column'>
+        {/* style={{ marginLeft: '50%', marginTop: '30%' }} */}
+          <div className='user_input'>
             {
               isSubmit ? (
-                <div>
-                  THAMK YOU
-                  We've added your card details
-                  <Button variant="dark" style={{ marginTop: '10px', width: '100%' }} onClick={()=> setIsSubmit(false)}>Continue</Button>{' '}
+                <div style={{ textAlign:'center'}}>
+                    <img src={icon_complete}/>
+                    <p>THANK YOU!</p>
+                    <p style={{color:'gray'}}>We've added your card details</p>
+                    <Button variant="dark" style={{ marginTop: '10px', width: '100%' }} onClick={()=> setIsSubmit(false)}>Continue</Button>{' '}
                 </div>
               ) : (
                 <Form onSubmit={handleSubmit}>
@@ -218,9 +247,9 @@ function App() {
         </div>
 
       </div>
-      <div style={{ position: 'absolute', left: '10%', top: '10%', backgroundRepeat: 'no-repeat' }}>
-        <img src={card_front} />
-        <table style={{ marginLeft: '40px', marginTop: '-140px', width: '80%' }}>
+      <div className='card_front'>
+        <img src={card_front_img} />
+        <table>
           <tbody>
             <tr>
               <td colSpan={2}>
@@ -266,18 +295,19 @@ function App() {
         <br />
       </div>
 
-
-      <div style={{ position: 'absolute', left: '10%', top: '50%', backgroundRepeat: 'no-repeat' }}>
-        <img src={card_back} />
+      {/* style={{ position: 'absolute', left: '10%', top: '50%', backgroundRepeat: 'no-repeat' }} */}
+      <div className='card_back'>
+        <img src={card_back_img} />
         {cvv.length > 1 ? (
-          <span style={{ marginLeft: '-80px', color: 'white', fontSize: '20px' }}>{cvv}</span>
+          <span className='cvv'>{cvv}</span>
         ) : (
-          <span style={{ marginLeft: '-80px', color: 'white', fontSize: '20px' }}>000</span>
+          <span className='cvv'
+          >000</span>
         )
         }
 
       </div>
-      {/* <div style={{ position: 'absolute', left: '10%', top: '50%', height: '100%', width: '100%', backgroundRepeat: 'no-repeat', backgroundImage: `url(${card_back})`}}></div> */}
+      {/* <div style={{ position: 'absolute', left: '10%', top: '50%', height: '100%', width: '100%', backgroundRepeat: 'no-repeat', backgroundImage: `url(${card_back_img})`}}></div> */}
     </div>
   );
 }
